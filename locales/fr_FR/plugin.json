@@ -77,7 +77,15 @@
     },
     "title": "Ajouter un plugin personnalisé",
     "update": "Mettre à jour",
-    "updateSuccess": "Paramètres du plugin mis à jour avec succès"
+    "updateSuccess": "Paramètres du plugin mis à jour avec succès",
+    "openai": {
+      "importUrl": "Importer depuis l'URL",
+      "schema": "Schéma"
+    },
+    "type": {
+      "lobe": "Plugin LobeChat",
+      "openai": "Plugin OpenAI"
+    }
   },
   "error": {
     "fetchError": "Échec de la requête vers ce lien de manifest. Veuillez vous assurer que le lien est valide et autorise les requêtes cross-origin.",
@@ -85,7 +93,8 @@
     "manifestInvalid": "Le manifest ne respecte pas les normes. Résultat de la validation : \n\n {{error}}",
     "noManifest": "Aucun fichier de description trouvé",
     "reinstallError": "Échec de la mise à jour du plugin {{name}}",
-    "urlError": "Ce lien ne renvoie pas de contenu au format JSON. Veuillez vous assurer qu'il s'agit d'un lien valide."
+    "urlError": "Ce lien ne renvoie pas de contenu au format JSON. Veuillez vous assurer qu'il s'agit d'un lien valide.",
+    "openAPIInvalid": "Échec d'analyse de l'OpenAPI, erreur : \n\n {{error}}"
   },
   "list": {
     "item": {
