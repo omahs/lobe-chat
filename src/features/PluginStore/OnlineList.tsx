@@ -7,7 +7,7 @@ import { useTranslation } from 'react-i18next';
 import { Center } from 'react-layout-kit';
 
 import { useToolStore } from '@/store/tool';
-import { pluginStoreSelectors } from '@/store/tool/selectors';
+import { pluginSelectors, pluginStoreSelectors } from '@/store/tool/selectors';
 
 import Loading from './Loading';
 import PluginItem from './PluginItem';
@@ -15,11 +15,16 @@ import PluginItem from './PluginItem';
 export const OnlineList = memo(() => {
   const { t } = useTranslation('plugin');
 
+  const pluginStoreList = useToolStore((s) => {
+    const custom = pluginSelectors.installedCustomPluginMetaList(s);
+    const store = pluginStoreSelectors.onlinePluginStore(s);
+
+    return [...custom, ...store];
+  }, isEqual);
+
   const [useFetchPluginList] = useToolStore((s) => [s.useFetchPluginStore]);
-
-  const pluginStoreList = useToolStore(pluginStoreSelectors.onlinePluginStore, isEqual);
-
   const { isLoading, error } = useFetchPluginList();
+
   const isEmpty = pluginStoreList.length === 0;
 
   return isLoading ? (
@@ -32,7 +37,7 @@ export const OnlineList = memo(() => {
           {t('store.networkError')}
         </>
       ) : (
-        <Empty description={t('store.empty')} image={Empty.PRESENTED_IMAGE_SIMPLE}></Empty>
+        <Empty description={t('store.empty')} image={Empty.PRESENTED_IMAGE_SIMPLE} />
       )}
     </Center>
   ) : (

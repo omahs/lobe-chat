@@ -22,7 +22,10 @@ export const PluginStore = memo<PluginStoreProps>(({ setOpen, open }) => {
 
   const [listType, installPlugins] = useToolStore((s) => [s.listType, s.installPlugins]);
 
-  const pluginStoreList = useToolStore(pluginStoreSelectors.onlinePluginStore, isEqual);
+  const pluginStoreList = useToolStore(
+    (s) => pluginStoreSelectors.onlinePluginStore(s).map((s) => s.identifier),
+    isEqual,
+  );
 
   return (
     <Modal
@@ -53,7 +56,7 @@ export const PluginStore = memo<PluginStoreProps>(({ setOpen, open }) => {
                 {listType === 'all' && (
                   <Button
                     onClick={() => {
-                      installPlugins(pluginStoreList.map((item) => item.identifier));
+                      installPlugins(pluginStoreList);
                     }}
                   >
                     {t('store.installAllPlugins')}
